@@ -16,25 +16,25 @@ SalesFINAL12-31-16Sample.csv
 
 # Grading Notes
 
-## Adam Acevedo
-* 2a. Wrong logic, used EndInv instead of BegInv:
+## Adam Acevedo **33**
+* 2a. -0.5 pts: Wrong logic, used begInv instead of EndInv:
     ```python
     EndInv['InvCost12_31_2016'] = EndInv['12_31_2016_Qty'] * begInv['Price']
     -->EndInv['InvCost12_31_2016'] = EndInv['12_31_2016_Qty'] * EndInv['Price']
     ```
-* 2b. Wrong logic, used EndInv instead of BegInv:
+* 2b. -0.5 pts: Wrong logic, used begInv instead of EndInv:
     ```python
     EndInv['InvCost12_31_2016'] = EndInv['12_31_2016_Qty'] * begInv['Price']
     --> EndInv['InvCost12_31_2016'] = EndInv['12_31_2016_Qty'] * EndInv['Price']
     ```
-* 3. Wrong logic, used begInv to multiply endInv quantity
+* 3. -0.5 pts: Wrong logic, used begInv to multiply endInv quantity
     ```python
     endInv['InvCost12_31_2016'] = EndInv['12_31_2016_Qty'] * begInv['Price']
     -->endInv['InvCost12_31_2016'] = EndInv['12_31_2016_Qty'] * EndInv['Price']
     ```
 * 4a. Used invoice data. Didn't filter, but can assume used receiving date (valid)
-* 4b. Didn't filter for 2016
-* 4c. Unsure why DF numbers dont match, logic is wonky but there
+* 4b. Didn't filter for 2016 (ignored)
+* 4c. -0.5 pts: Reorder aggregation before ratio freight/dollar
 * 4d. Fix output line to match answer key (ignored)
     ```python
     HighestFreight[["Freight"]].head()
@@ -45,31 +45,33 @@ SalesFINAL12-31-16Sample.csv
 ##  Armando Almazan **ERROR**
 * Cannot grade, file is in HTML, not ipynb
 
-## Tamara Alvarado
+## Tamara Alvarado **34.5**
 * Reponses identical to answer key
-* 5. Broken logic, uses equal over subtraction symbol:
+* 5. =-0.5 pts: Broken logic, uses equal over subtraction symbol:
     ```python
     dfCM['Contribution Margin']=dfCM['SalesPrice']=dfCM['PurchasePrice']
     -->dfCM['Contribution Margin']=dfCM['SalesPrice']-dfCM['PurchasePrice']
     ```
+  * No mention of attending Friday Session
 
-## Ella AlvesdeLima
-* 1a. Missing sort_values
+## Ella AlvesdeLima **29.5**
+* 1a. -0.5 pts: Missing sort_values
     ```python
     begInv_Store = begInv[['Store','01_01_2016_Qty','InvCost01_01_2016']].groupby('Store').sum()
     -->begInv_Store = begInv[['Store','01_01_2016_Qty','InvCost01_01_2016']].groupby('Store').sum().sort_values('InvCost01_01_2016', ascending = False)
     ```
     * 1b. Has the correct answer
-* 1b. Responses from 1a are in 1b, missing 1b proper response. Didn't reuse the function to sort by Brand, just repeated the same Store function but sorted again
-* 2ab. endInv_Store is not definied yet is used multiple times.
+* 1b. -1 pt: Responses from 1a are in 1b, missing 1b proper response. Didn't reuse the function to sort by Brand, just repeated the same Store function but sorted again
+* 2ab. -2 pts: endInv_Store is not definied yet is used multiple times.
   * Both use double sorting when it should be grouping by brand or store instead of combining sorts twice.
         ```python
         endInv.sort_values(by='InvCost12_31_2016').tail(10).sort_values(by='InvCost12_31_2016', ascending = True)
         ```
 * 4. No filtering for year (default is receivingdate which is 2016)
 * 4c. Used Invoice data, logic looks right, but missing equality symbol in using '>' vs '>='
-* 4d. Merges purchases with invoices then filters out freight and quantity
+* 4d. -2 pts: Merges purchases with invoices then filters out freight and quantity
   * Dock point for merging with purchases
+  * Takes too much effort to correct code
 * 4e. Good enough
 
 ## Sarah Aufranc **35**
@@ -78,71 +80,73 @@ SalesFINAL12-31-16Sample.csv
 * 4b. Used purchase data
 * Full points
 
-## Emily Beaton
-* 4d. Logic error, used OR instead of AND:
+## Emily Beaton **34.5**
+* 4d. -0.5 pts: Logic error, used OR instead of AND:
   ```python
   Invoices_100 = Invoices4d[Invoices4d["Freight"]>100 | (Invoices4d["Quantity"]<=1000)]
   ```
+  * Overall unsure why this is broken/numbers wrong
   * 5. Formula is missing salesquantity, this is profit per unit, but ill pass it
 
-## Jack Bennison
+## Jack Bennison **34**
 * 4c used > over >=
-* 4d. Filtered for freight and quantity, but didn't aggregate and groupby 
+* 4d. -1 pt: Filtered for freight and quantity, but didn't aggregate and groupby 
 
-## Macy Boell
-* 4a. Wrong order, max num was 31k:
+## Macy Boell **22**
+* 4a. -0.5 pt: Wrong order, max num was 31k:
 ```python
 purchases_vendors = purchases_vendors[['VendorNumber','VendorName','Dollars']].groupby('Dollars').sum()
 -->purchases_vendors = purchases_vendors.groupby(['VendorNumber','VendorName'])[['Dollars']].sum()
 ```
-* 4b. Wrong order, again
-* 4c. No answer
-* 4d. N/A
-* 4e. N/A
-* 5. N/A
+* 4b. -0.5 pt: Wrong order, same as 4a issue
+* 4c. -3 pts: No answer
+* 4d. -3 pts: N/A
+* 4e. -3 pts: N/A
+* 5. -3 pts: N/A
 
-## Eric Bonomo
-* 2a. Copy and pasted code for 1b, but forgot to change the variables to output the sorted 2a.
+## Eric Bonomo **34.5**
+* 2a. -0.5 pts: Copy and pasted code for 1b, but forgot to change the variables to output the sorted 2a.
   ```python
   begInv_Store.sort_values(by='InvCost01_01_2016',ascending=False).head(10)
   -->endInv_Store.sort_values(by='InvCost12_31_2016',ascending=False).head(10)
   ```
 * 5. Unable to run, requires 34 GiB to allocate, code seems fine, missing an explanantion tho
 
-## Cameron Branch
-* 4d. Missing groupby and aggregation, only filtered and sorted the data.
+## Cameron Branch **34**
+* 4d. -1 pt: Missing groupby and aggregation, only filtered and sorted the data.
 ```python
 sort_sample[['VendorNumber', 'VendorName','Quantity','Freight']].sort_values(by='Freight',ascending=False).head()
 -->sort_sample.groupby(["VendorNumber", "VendorName", ])[['Quantity','Freight']].sum().sort_values(by='Freight',ascending=False).head()
 ```
 
-## Jayden Brewer
-* 4c. Missing per $ freight, no calculation, only filtered for 250k, no heads shown
-* 4d. Misunderstanding dollars as freight cost, also missing sorting for highest
-* 4e. This is just dividing 4d in dollars/quantity twice, the same variables used again below?
+## Jayden Brewer **27.5**
+* 4c. -2 pts: Missing per $ freight, no calculation, only filtered for 250k, only showed filtered head
+* 4d. -0.5 pt: Misunderstanding dollars as freight cost, also missing sorting for highest
+* 4e. -2 pt: This is just dividing 4d in dollars/quantity twice, the same variables used again below?
+* 5. -3 pts: Missing, no Friday note
 
-## Riley Buckley
+## Riley Buckley **35**
 * Identical to answer key aside from not filtering for 2016
 * Told to skip #5
   
-## WIlliam Cannon
-* 4c. Faulty logic
+## WIlliam Cannon **34**
+* 4c. -1 pt: Faulty logic, also need to aggregate before calculating ratios
 ```python
 top_purchases = purchases_4c[['VendorNumber','VendorName','Freightper$%','FreightperUnit']].groupby('VendorNumber').sum()
 ```
 
-## Faith Carroll
+## Faith Carroll **35**
 * 4e. Similar to key, but broken apart
 
 ## Jialin Chen **35**
 
-## Keith Chen 
-* 4d. Unknown to the issue. DF not correct, but misunderstanding that dollars is freight.
-* 4e. No explanation, idk what I'm looking at because all this code pertains to #4d, nothing from #4c
-* 5. Unsure what is the analysis, created a cost formula from freight then subtracted it from dfs without merging.
+## Keith Chen **34**
+* 4d. -0.5 pts: Unknown to the issue. DF not correct, but misunderstanding that dollars is freight.
+* 4e. -0.5 pts: No explanation, idk what I'm looking at because all unsure if this code pertains to #4d, nothing from #4c
+* 5. (ignored) Unsure what is the analysis, created a cost formula from freight then subtracted it from dfs without merging.
 
-## Kennedy Cole
-* 4e. Logic error in using 4c to subtract from 4d.
+## Kennedy Cole **34.5**
+* 4e. -0.5 pts: Logic error in using 4c to subtract from 4d.
 ```python
 VendorsD['FreightPerDollarPercent'] = (VendorsD['Freight'] / Vendor_over_250['Dollars']) * 100
 --> VendorsD['FreightPerDollarPercent'] = (VendorsD['Freight'] / VendorsD['Dollars']) * 100
@@ -378,11 +382,154 @@ VendorsD['FreightPerDollarPercent'] = (VendorsD['Freight'] / Vendor_over_250['Do
 * 4e. Only did per unit then sorted by Freight in ascending order
 * 5. Only used purchases (where is sales?)
 
+## Crystal Nguyen **35**
+* Went to Friday help
+
+## Austin Osborne **35**
+
+## Parker Darren
+* 3. Wrong merge type, used 'inner'
+* 4c. Need to aggregate before Frieght/Dollars
+* 4d. Edrington America not top, also used '<' instead of '<='
+* 5. Only used Sales
+
+## Abigail Parkin **35**
+
+## Matthew Patchin
+* 3. Left code missing closing brackets, also merged inner instead of outer.
+* 4a. Error in understanding, used quantity*purchaseprice instead of dollars field, also didn't sort
+* 4b. Missing sort
+* 4c-5. Missing
+
+## Garrett Plank
+* 3. Merged on inner instead of outer
+* 5. Only used sales to calculate the tax per unit
+
+## Emily Plant **35**
+
+## Javier Ruiz **35**
+
+## Alejandro Sanchez Cuesta
+* 1b. Missing
+* 4e. Error, missing fields 'Freight/Dollar','Freight/Unit' since it pulls from purchases and formulas weren't made for the fields
+  * Initial DF analysis is fine
+* 5. Missing 
+
+## Payge Sanderson **35**
+* 4e. Only did analysis based on head values.
+
+## Rhys Schluter
+* 4c. Need to aggregate before getting ratio freight/dollar or else it's summing averages
+  * Would've fixed the variance
+* 4d. Work is all there, but wrong variables being used (rename 1 variable and delete one line fixes it)
+```python
+top_vendor_freight_cost = invoice_purchases[['VendorName','Freight',]].groupby('VendorName').sum()
+--->top_vendor_freight_cost = above_100[['VendorName','Freight',]].groupby('VendorName').sum()
+```
+* 4e. Missing explanation and analysis of per dollar and per unit
+  * This is a repeat of 4d with some groupby
+* Only used Sales data.
+
+## Rene Segura Ramos
+* 4c. Reorder aggregation before freight/dollars 
+* 4d. Missing aggregation for freight
 
 
+## Dylan Shafer
+* 5. Missing explanation of what's this analysis
+  * Sums all the grouped SalesDollars which is iffy cause that's adding up one sale price per grouped row
+  * Divides individual item price by the total purchase price from invoice?
+  * Unsure what is the intent here
+  
+## Michael Siddel **35**
+
+## James Smith
+* 4c. Did aggregate before getting ratio, but didn't use the aggregrated variable nor the filtered dataset variable
+  * Code's all there, but the variables aren't connected
+* 4d. Missing aggregation for freight
+* Only used sales data and just summed SalesDollars
+
+## Dylan Spisla **35**
+
+## Krista Suarez **35**
+
+## Hannah Tallan
+* 4d. Missing aggregation for freight
+
+## Faith Thompson **35**
+
+## Caleb Tremper
+* 3. Didn't filter for the five columns
+* 4a. Error: Missing purchases csv data variable (I added it in)
+  ```python
+  purchases = pd.read_csv("PurchasesFINAL12-31-16Sample.csv")
+  ```
+* 4b. Error: Missing invoices csv data variable and conversion to datetime (I added it in)
+  ```python
+  -->invoices = pd.read_csv("InvoicePurchases12-31-16Sample.csv")
+  -->invoices['InvoiceDate'] = pd.to_datetime(invoices['InvoiceDate'])
+  ```
+* 4c. Missing filtering for 250k, missing per dollar calculation
+* 4d. Used dollars instead of freight
+* 4e. Error: per dollar field doesn't exist in this DF to filter
+  * Missing explanantion
+* 5. Only used sales data.
+
+## Kenta Truong
+* Uploaded wrong file type, had to add .ipynb
+* 3. Wrong merge, used left instead of outer
+* 4d. Missing explanantion
+* 5. Only used sales data.
+
+## Ryan Tsai **35**
+* 4e. Noted that friday session so questions are excused because there's an error making 4e unrunnable
+  * df2016invoices doesnt have a FreightRate% field to call
+
+## Brendon Turnbaugh
+* 4d. Missing aggregation of freight
+* 5. Only used sales data.
+
+## Peyton Vanhouten
+* 5. Only used sales data.
+  * Very similar to answers, maybe went to Friday session, but wasn't stated anywhere.
+
+## Jordan Vogt
+* 4e. Missing explanantion.
+* 5. Only used sales data. 
+  * Maybe went to Friday, similar to answer key content overall
+
+## Riley Wall
+* 5. Error, unsure what was in his invoices, but the merge can't work with those variables
+  * Merging on nonexistent fields
+  * Even if merge worked, based on the column outputs, there would be a suffix since everything is the same, but the suffix doesn't appear in use of 'SalesDate'?
+  * It appears from his output before running, it's merging the same fields against themselves, so it must be two sales datas being merged?
+  
+## Alex Ward **35**
+* 5. Attempted to merge december sales with all sales data. Requires 356GiB (happened at the end but commented not necessary)
+  * However analysis is fine, individually compared two sorted datasets
+
+## Kamila White
+* 4a. Used Quantity instead of Dollars
+* 4e. Iffy on the analysis. DF is correct, but the analysis is questionable.
+  * "The per dollar prices are similar but the vendors are different. It makes sense, as the vendors in C might be purchasing more than $100 or 1,000 per transaction. "
+  * If a .mean() was pulled it'd reveal they're not similar and the vendors in C can't purchase more than their limits since they've been filtered out
 
 
+## Brett Wiebe **35**
+* 4e. Final table anaylsis of vendors doesn't run (FreightRate is not defined in the field being called)
+* 5. Went to Friday session
 
+## Eedasso Wotcha
+* 4d. Missing parenthsis on function call .sum()
+  * Fixed shows correct output
+* 4e. Missing
+* 5. Missing
+
+## Ross Yankowitz
+* 4a. Missing aggregation, no groupby or summing found
+* 4d. Missing aggregation for freight
+* 4e. Missing explanation
+* 5. Analysis is there, but could benefit from sorting to be more accurate. I'll take it.
 
 
 
